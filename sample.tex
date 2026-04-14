@@ -1,0 +1,56 @@
+% sample.tex — minimal demonstration of the GoodCompanions2 chess font
+% Compile with: pdflatex sample.tex
+% (Font must be installed — see README.md for instructions.)
+\documentclass[12pt]{article}
+
+\usepackage[
+  paperwidth=6in,
+  paperheight=9in,
+  inner=0.45in,
+  outer=0.40in,
+  top=0.45in,
+  bottom=0.50in
+]{geometry}
+
+\usepackage[LSB1,T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{chessboard}
+\usepackage{chessfss}
+
+\newcommand{\coordfont}{\rmfamily\bfseries}
+\setfigfontfamily{goodcompanions2}
+
+\setboardfontcolors{
+  blackfield=black!60
+}
+
+\setchessboard{
+  boardfontsize=18pt,
+  boardfontfamily=goodcompanions2,
+  boardfontencoding=LSB1,
+  borderwidth=0.5pt,
+  bordercolor=black,
+  showmover=false,
+  labelleft=true,
+  labelbottom=true,
+  labelleftwidth=1.2ex,
+  labelbottomlift=1.2\baselineskip,
+  labelfont=\coordfont,
+  labelfontsize=7pt
+}
+
+\begin{document}
+
+\begin{center}
+  \Large\bfseries GoodCompanions2 Chess Font
+
+  \vspace{0.5em}
+
+  \normalsize Starting Position
+
+  \vspace{1.5em}
+
+  \chessboard[setfen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1]
+\end{center}
+
+\end{document}

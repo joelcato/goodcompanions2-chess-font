@@ -73,7 +73,10 @@ chess-board.enc slot -> glyph name mapping:
   0x73 (115)  T          = BRookOnBlack
 
 Strategy: open the TTF, rename/re-unicode glyphs so each lands at its target
-slot, strip everything else, then export as Type 1.
+slot, strip everything else, then export as Type 1.  Also exports a prepared
+TTF (chess-goodcompanions2.ttf) with glyphs already renamed and stripped, so
+any standard TTF→pfb converter will produce an equivalent result without
+needing this script.
 
 Usage:
     python3 make_gc_pfb.py [--output-dir DIR]
@@ -89,6 +92,25 @@ import fontforge  # type: ignore  # C extension bundled with FontForge app, no p
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TTF = os.path.join(SCRIPT_DIR, "goodcompanions.ttf")
 OUT_NAME = "chess-goodcompanions2-board-fig-raw"
+PREPARED_TTF_NAME = "chess-goodcompanions2"
+
+# chess-board.enc slot assignments for each glyph name.
+# Setting these as unicode values in the prepared TTF means any TTF→pfb
+# converter will produce a pfb with the same glyph-to-slot layout.
+ENC_UNICODE = {
+    "asterisk": 0x30,
+    "B": 0x41, "b": 0x42,
+    "K": 0x4A, "k": 0x4B,
+    "Q": 0x4C, "N": 0x4D, "n": 0x4E,
+    "P": 0x4F, "p": 0x50,
+    "q": 0x51, "r": 0x52, "R": 0x53,
+    "plus": 0x5A,
+    "V": 0x61, "v": 0x62,
+    "L": 0x6A, "l": 0x6B,
+    "W": 0x6C, "M": 0x6D, "m": 0x6E,
+    "O": 0x6F, "o": 0x70,
+    "w": 0x71, "t": 0x72, "T": 0x73,
+}
 
 GLYPH_MAP = {
     # Kings
@@ -173,6 +195,17 @@ def main() -> None:
             font[temp_name].glyphname = dst_name
 
     print(f"\nKept {len(GLYPH_MAP)} glyphs, removed {len(to_delete)} others.")
+
+    # Step 4: Set unicode values to chess-board.enc slots and export prepared TTF.
+    # The prepared TTF has glyph names + codepoints already matching chess-board.enc,
+    # so a naive TTF→pfb conversion (without this script) gives the same result.
+    for glyph_name, enc_slot in ENC_UNICODE.items():
+        if glyph_name in font:
+            font[glyph_name].unicode = enc_slot
+
+    prepared_ttf_path = os.path.join(SCRIPT_DIR, PREPARED_TTF_NAME + ".ttf")
+    font.generate(prepared_ttf_path)
+    print(f"Generated: {prepared_ttf_path}")
 
     out_path = os.path.join(out_dir, OUT_NAME)
     font.generate(out_path + ".pfb")
