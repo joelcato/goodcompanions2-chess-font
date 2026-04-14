@@ -1,0 +1,50 @@
+% sample-comparison.tex -- Four-font comparison grid
+% Compile with: pdflatex sample-comparison.tex
+\documentclass{article}
+
+\usepackage[
+  a4paper,
+  top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm
+]{geometry}
+
+\usepackage[LSB1,T1]{fontenc}
+\usepackage{chessboard}
+\usepackage{chessfss}
+
+\setchessboard{
+  boardfontencoding=LSB1,
+  boardfontsize=22pt,
+  borderwidth=0.5pt,
+  bordercolor=black,
+  showmover=false,
+  labelleft=true,
+  labelbottom=true,
+  labelfont=\rmfamily\bfseries,
+  labelfontsize=7pt
+}
+
+\newcommand{\startfen}{rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1}
+
+\newcommand{\fontboard}[2]{%
+  \begin{minipage}[t]{0.47\textwidth}
+    \centering
+    \textbf{#1}\\[4pt]
+    {\setchessboard{boardfontfamily=#2}%
+    \chessboard[setfen=\startfen]}%
+  \end{minipage}}
+
+\begin{document}
+\parindent=0pt
+\pagestyle{empty}
+
+\noindent
+\fontboard{GoodCompanions2}{goodcompanions2}\hfill
+\fontboard{Merida}{merida}
+
+\bigskip
+
+\noindent
+\fontboard{SKAKnew}{skaknew}\hfill
+\fontboard{AlphaDia}{alphadia}
+
+\end{document}
