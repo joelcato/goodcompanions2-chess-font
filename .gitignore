@@ -13,3 +13,11 @@ archive/
 *.fdb_latexmk
 *.out
 *.toc
+
+# Generated font support files (produced by the install steps)
+*.afm
+*.pfb
+*.tfm
+*.fd
+*.map
+compile.log

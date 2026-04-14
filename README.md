@@ -18,16 +18,32 @@ See **[sample.pdf](sample.pdf)** for a preview showing all encodings and color o
 
 ## Prerequisites
 
-You'll need a working TeX Live (or MiKTeX) installation with the following CTAN packages:
+You'll need a working TeX Live (or MiKTeX) installation with the following packages:
 
 - [`chessboard`](https://ctan.org/pkg/chessboard)
 - [`chessfss`](https://ctan.org/pkg/chessfss)
-- [`enpassant`](https://ctan.org/pkg/enpassant) — provides `chess-board.enc` and the font infrastructure
 
 Install via TeX Live:
 
 ```bash
-tlmgr install chessboard chessfss enpassant
+sudo tlmgr install chessboard chessfss
+```
+
+You also need the [enpassant](https://ctan.org/pkg/enpassant) package, which is **not available via `tlmgr`** and must be installed manually:
+
+1. Download the zip from https://ctan.org/pkg/enpassant
+2. Extract it
+3. Copy the extracted `enpassant/` folder into your local texmf tree:
+
+```bash
+# macOS:
+TEXMF=~/Library/texmf
+# Linux:
+# TEXMF=~/texmf
+
+mkdir -p $TEXMF/fonts/chess
+cp -r enpassant $TEXMF/fonts/chess/
+mktexlsr
 ```
 
 ---
@@ -41,6 +57,7 @@ The TTF must be converted to Type 1 (PFB) and the TeX support files installed. R
 ```bash
 fontforge -lang=ff -c '
   Open("chess-goodcompanions2.ttf");
+  Reencode("custom");
   Generate("chess-goodcompanions2-board-fig-raw.pfb");
 '
 ```
@@ -51,15 +68,13 @@ This produces `chess-goodcompanions2-board-fig-raw.pfb` and `chess-goodcompanion
 
 ```bash
 # LSB encoding (board squares + pieces)
-afm2tfm chess-goodcompanions2-board-fig-raw.afm \
-  -T $(kpsewhich chess-board.enc) \
-  chess-goodcompanions2-lsb
+afm2tfm chess-goodcompanions2-board-fig-raw.afm -T $TEXMF/fonts/chess/enpassant/chess-board.enc chess-goodcompanions2-lsb.tfm
 
 # LSF encoding (figurines)
-afm2tfm chess-goodcompanions2-board-fig-raw.afm \
-  -T chess-goodcompanions2-fig.enc \
-  chess-goodcompanions2-lsf
+afm2tfm chess-goodcompanions2-board-fig-raw.afm -T $TEXMF/fonts/chess/enpassant/chess-fig.enc chess-goodcompanions2-lsf.tfm
 ```
+
+Note: `$TEXMF` must be set (see Prerequisites above).
 
 ### 3. Create font definition files
 
@@ -82,15 +97,27 @@ Create `lsfgoodcompanions2.fd`:
 ### 4. Install to your local texmf tree
 
 ```bash
-TEXMF=~/Library/texmf   # macOS; Linux: ~/texmf
+# macOS:
+TEXMF=~/Library/texmf
+# Linux:
+# TEXMF=~/texmf
+
+mkdir -p $TEXMF/fonts/type1/chess/enpassant
+mkdir -p $TEXMF/fonts/afm/chess/enpassant
+mkdir -p $TEXMF/fonts/tfm/chess/enpassant
+mkdir -p $TEXMF/fonts/truetype/chess/enpassant
+mkdir -p $TEXMF/fonts/enc/dvips/chess
+mkdir -p $TEXMF/tex/latex/chessfss/enpassant
 
 cp chess-goodcompanions2-board-fig-raw.pfb  $TEXMF/fonts/type1/chess/enpassant/
 cp chess-goodcompanions2-board-fig-raw.afm  $TEXMF/fonts/afm/chess/enpassant/
 cp chess-goodcompanions2-lsb.tfm            $TEXMF/fonts/tfm/chess/enpassant/
 cp chess-goodcompanions2-lsf.tfm            $TEXMF/fonts/tfm/chess/enpassant/
 cp chess-goodcompanions2.ttf                $TEXMF/fonts/truetype/chess/enpassant/
-cp lsb1goodcompanions2.fd  lsb2goodcompanions2.fd  lsb3goodcompanions2.fd  lsfgoodcompanions2.fd \
-                            $TEXMF/tex/latex/chessfss/enpassant/
+cp $TEXMF/fonts/chess/enpassant/chess-board.enc  $TEXMF/fonts/enc/dvips/chess/
+cp $TEXMF/fonts/chess/enpassant/chess-fig.enc    $TEXMF/fonts/enc/dvips/chess/
+cp lsb1goodcompanions2.fd lsb2goodcompanions2.fd lsb3goodcompanions2.fd lsfgoodcompanions2.fd \
+   $TEXMF/tex/latex/chessfss/enpassant/
 ```
 
 ### 5. Register the map entries
@@ -100,13 +127,14 @@ Create `chess-goodcompanions2.map`:
 ```
 chess-goodcompanions2-board-fig-raw GC2004D2 <chess-goodcompanions2-board-fig-raw.pfb
 chess-goodcompanions2-lsb GC2004D2 " ChessBoardEncoding ReEncodeFont " <chess-board.enc <chess-goodcompanions2-board-fig-raw.pfb
-chess-goodcompanions2-lsf GC2004D2 " ChessGC2FigEncoding ReEncodeFont " <chess-goodcompanions2-fig.enc <chess-goodcompanions2-board-fig-raw.pfb
+chess-goodcompanions2-lsf GC2004D2 " ChessFigEncoding ReEncodeFont " <chess-fig.enc <chess-goodcompanions2-board-fig-raw.pfb
 ```
 
 Then register it:
 
 ```bash
-cp chess-goodcompanions2.map $(kpsewhich --var-value TEXMFLOCAL)/fonts/map/dvips/chess/
+mkdir -p $TEXMF/fonts/map/dvips/chess
+cp chess-goodcompanions2.map $TEXMF/fonts/map/dvips/chess/
 updmap-user --enable Map chess-goodcompanions2.map
 ```
 
