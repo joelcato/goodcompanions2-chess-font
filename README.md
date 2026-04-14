@@ -164,11 +164,12 @@ mktexlsr
 
 **FontForge:**
 
-```bash
-sudo apt install fontforge
-```
-
-(Or equivalent for your distribution: `sudo dnf install fontforge`, `sudo pacman -S fontforge`, etc.)
+| Distro(s) | Command |
+|---|---|
+| Ubuntu, Debian, Mint, Pop!\_OS, Elementary | `sudo apt install fontforge` |
+| Fedora, RHEL, CentOS | `sudo dnf install fontforge` |
+| Arch, Manjaro | `sudo pacman -S fontforge` |
+| openSUSE | `sudo zypper install fontforge` |
 
 ### Installation
 
