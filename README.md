@@ -36,15 +36,14 @@ You also need the [enpassant](https://ctan.org/pkg/enpassant) package, which is 
 3. Copy the extracted `enpassant/` folder into your local texmf tree:
 
 ```bash
-# macOS:
 TEXMF=~/Library/texmf
-# Linux:
-# TEXMF=~/texmf
 
 mkdir -p $TEXMF/fonts/chess
 cp -r enpassant $TEXMF/fonts/chess/
 mktexlsr
 ```
+
+(Linux: use `TEXMF=~/texmf` instead.)
 
 ---
 
@@ -66,11 +65,10 @@ This produces `chess-goodcompanions2-board-fig-raw.pfb` and `chess-goodcompanion
 
 ### 2. Generate TFM files
 
-```bash
-# LSB encoding (board squares + pieces)
-afm2tfm chess-goodcompanions2-board-fig-raw.afm -T $TEXMF/fonts/chess/enpassant/chess-board.enc chess-goodcompanions2-lsb.tfm
+Requires enpassant to be installed in your texmf tree (see Prerequisites above).
 
-# LSF encoding (figurines)
+```bash
+afm2tfm chess-goodcompanions2-board-fig-raw.afm -T $TEXMF/fonts/chess/enpassant/chess-board.enc chess-goodcompanions2-lsb.tfm
 afm2tfm chess-goodcompanions2-board-fig-raw.afm -T $TEXMF/fonts/chess/enpassant/chess-fig.enc chess-goodcompanions2-lsf.tfm
 ```
 
@@ -78,29 +76,32 @@ Note: `$TEXMF` must be set (see Prerequisites above).
 
 ### 3. Create font definition files
 
-Create `lsb1goodcompanions2.fd`, `lsb2goodcompanions2.fd`, `lsb3goodcompanions2.fd`:
-
-```latex
+```bash
+cat > lsb1goodcompanions2.fd << 'EOF'
 \DeclareFontFamily{LSB1}{goodcompanions2}{}
 \DeclareFontShape{LSB1}{goodcompanions2}{m}{n}{<-> chess-goodcompanions2-lsb}{}
-```
+EOF
 
-(Change `LSB1` to `LSB2` / `LSB3` for the other two files.)
+cat > lsb2goodcompanions2.fd << 'EOF'
+\DeclareFontFamily{LSB2}{goodcompanions2}{}
+\DeclareFontShape{LSB2}{goodcompanions2}{m}{n}{<-> chess-goodcompanions2-lsb}{}
+EOF
 
-Create `lsfgoodcompanions2.fd`:
+cat > lsb3goodcompanions2.fd << 'EOF'
+\DeclareFontFamily{LSB3}{goodcompanions2}{}
+\DeclareFontShape{LSB3}{goodcompanions2}{m}{n}{<-> chess-goodcompanions2-lsb}{}
+EOF
 
-```latex
+cat > lsfgoodcompanions2.fd << 'EOF'
 \DeclareFontFamily{LSF}{goodcompanions2}{}
 \DeclareFontShape{LSF}{goodcompanions2}{m}{n}{<-> chess-goodcompanions2-lsf}{}
+EOF
 ```
 
 ### 4. Install to your local texmf tree
 
 ```bash
-# macOS:
 TEXMF=~/Library/texmf
-# Linux:
-# TEXMF=~/texmf
 
 mkdir -p $TEXMF/fonts/type1/chess/enpassant
 mkdir -p $TEXMF/fonts/afm/chess/enpassant
@@ -120,14 +121,18 @@ cp lsb1goodcompanions2.fd lsb2goodcompanions2.fd lsb3goodcompanions2.fd lsfgoodc
    $TEXMF/tex/latex/chessfss/enpassant/
 ```
 
+(Linux: use `TEXMF=~/texmf` instead.)
+
 ### 5. Register the map entries
 
 Create `chess-goodcompanions2.map`:
 
-```
+```bash
+cat > chess-goodcompanions2.map << 'EOF'
 chess-goodcompanions2-board-fig-raw GC2004D2 <chess-goodcompanions2-board-fig-raw.pfb
 chess-goodcompanions2-lsb GC2004D2 " ChessBoardEncoding ReEncodeFont " <chess-board.enc <chess-goodcompanions2-board-fig-raw.pfb
 chess-goodcompanions2-lsf GC2004D2 " ChessFigEncoding ReEncodeFont " <chess-fig.enc <chess-goodcompanions2-board-fig-raw.pfb
+EOF
 ```
 
 Then register it:
