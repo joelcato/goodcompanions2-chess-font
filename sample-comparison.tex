@@ -10,6 +10,7 @@
 \usepackage[LSB1,T1]{fontenc}
 \usepackage{chessboard}
 \usepackage{chessfss}
+\usepackage[dvipsnames]{xcolor}
 
 \setchessboard{
   boardfontencoding=LSB1,
@@ -21,6 +22,10 @@
   labelbottom=true,
   labelfont=\rmfamily\bfseries,
   labelfontsize=7pt
+}
+
+\setboardfontcolors{
+  blackfield=OliveGreen!80
 }
 
 \newcommand{\startfen}{rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1}
