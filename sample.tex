@@ -102,4 +102,118 @@ LSB & \texttt{m}  & \texttt{chess-goodcompanions2-lsb}
 
 {\large\figfont\symking\symqueen\symrook\symbishop\symknight\sympawn}\\[4pt]
 
+\newpage
+
+% =============================================================
+%  Merida
+% =============================================================
+
+\setfigfontfamily{merida}
+\setchessboard{boardfontfamily=merida}
+
+\noindent\textbf{Merida}
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+source:     & \texttt{https://www.enpassant.dk/chess/fonteng.htm} \\[2pt]
+author:     & Armando H.\ Marroquin (1998) \\[2pt]
+characters: & figurine and board symbols \\[2pt]
+familyname: & merida \\[2pt]
+fonts:      & The following fonts for the package chessfss can be made from this source: \\
+\end{tabular}
+
+\medskip
+\begin{tabular}{@{}lll>{\raggedright\arraybackslash\small}p{6.5cm}@{}}
+\toprule
+encoding & serie & tfm-name & reencoding command for \texttt{chess.map} \\
+\midrule
+raw & --          & \texttt{chess-merida-board-fig-raw} & none \\[4pt]
+LSF & \texttt{m}  & \texttt{chess-merida-lsf}
+    & \texttt{" ChessFigEncoding ReEncodeFont "}
+      \texttt{<chess-fig.enc} \\[4pt]
+LSB & \texttt{m}  & \texttt{chess-merida-lsb}
+    & \texttt{" ChessBoardEncoding ReEncodeFont "}
+      \texttt{<chess-board.enc} \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,setfontcolors]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]
+\end{minipage}
+
+\bigskip
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSB2}%
+  \chessboard[setfen=\startfen,
+    color=black!30,colorblackbackfields,
+    clearfontcolors,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSB3}%
+  \chessboard[setfen=\startfen,
+    color=black!30,colorblackbackfields,
+    clearfontcolors,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}
+
+\bigskip
+
+{\large\figfont\symking\symqueen\symrook\symbishop\symknight\sympawn}\\[4pt]
+
+\newpage
+
+% =============================================================
+%  SKAKnew
+% =============================================================
+
+\setfigfontfamily{skaknew}
+\setchessboard{boardfontfamily=skaknew}
+
+\noindent\textbf{SKAKnew}
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+source:     & \texttt{https://www.enpassant.dk/chess/fonteng.htm} \\[2pt]
+author:     & Eric Bentzen (2003) \\[2pt]
+characters: & figurine and board symbols \\[2pt]
+familyname: & skaknew \\[2pt]
+fonts:      & The following fonts for the package chessfss can be made from this source: \\
+\end{tabular}
+
+\medskip
+\begin{tabular}{@{}lll>{\raggedright\arraybackslash\small}p{6.5cm}@{}}
+\toprule
+encoding & serie & tfm-name & reencoding command for \texttt{chess.map} \\
+\midrule
+LSB (T) & \texttt{m}  & \texttt{SkakNew-DiagramT} & (sizes $<$16pt) \\[4pt]
+LSB     & \texttt{m}  & \texttt{SkakNew-Diagram}  & (sizes $\geq$16pt) \\[4pt]
+LSF     & \texttt{m}  & \texttt{SkakNew-Figurine} & \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,setfontcolors]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]
+\end{minipage}
+
+\bigskip
+
+{\large\figfont\symking\symqueen\symrook\symbishop\symknight\sympawn}\\[4pt]
+
 \end{document}

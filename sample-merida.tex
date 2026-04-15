@@ -1,0 +1,104 @@
+% sample-merida.tex -- Merida Chess Font
+%   Gallery page in the style of chessfonts_gallery.pdf (Ulrike Fischer)
+% Compile with: pdflatex sample-merida.tex
+% (Font must be installed -- see README.md for installation instructions.)
+\documentclass{article}
+
+\usepackage[
+  a4paper,
+  top=2.5cm, bottom=2.5cm, left=3cm, right=3cm
+]{geometry}
+
+\usepackage[LSB,LSB1,LSB2,LSB3,LSF,T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{chessboard}
+\usepackage{chessfss}
+
+% ---- Font setup ----
+\setfigfontfamily{merida}
+
+\setchessboard{
+  boardfontfamily=merida,
+  boardfontencoding=LSB1,
+  boardfontsize=20pt,
+  borderwidth=0.5pt,
+  bordercolor=black,
+  showmover=false,
+  labelleft=true,
+  labelbottom=true,
+  labelfont=\rmfamily\bfseries,
+  labelfontsize=7pt
+}
+
+\newcommand{\startfen}{rnbqkbnr/pppppppp/8/3qk3/3QK3/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1}
+
+\begin{document}
+\parindent=0pt
+
+\bigskip
+
+\noindent\textbf{Merida}
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+source:     & \texttt{https://www.enpassant.dk/chess/fonteng.htm} \\[2pt]
+author:     & Armando H.\ Marroquin (1998) \\[2pt]
+characters: & figurine and board symbols \\[2pt]
+familyname: & merida \\[2pt]
+fonts:      & The following fonts for the package chessfss can be made from this source: \\
+\end{tabular}
+
+\medskip
+\begin{tabular}{@{}lll>{\raggedright\arraybackslash\small}p{6.5cm}@{}}
+\toprule
+encoding & serie & tfm-name & reencoding command for \texttt{chess.map} \\
+\midrule
+raw & --          & \texttt{chess-merida-board-fig-raw} & none \\[4pt]
+LSF & \texttt{m}  & \texttt{chess-merida-lsf}
+    & \texttt{" ChessFigEncoding ReEncodeFont "}
+      \texttt{<chess-fig.enc} \\[4pt]
+LSB & \texttt{m}  & \texttt{chess-merida-lsb}
+    & \texttt{" ChessBoardEncoding ReEncodeFont "}
+      \texttt{<chess-board.enc} \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+
+% ---- Four chessboards (2x2 grid) ----
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,setfontcolors]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]
+\end{minipage}
+
+\bigskip
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSB2}%
+  \chessboard[setfen=\startfen,
+    color=black!30,colorblackbackfields,
+    clearfontcolors,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSB3}%
+  \chessboard[setfen=\startfen,
+    color=black!30,colorblackbackfields,
+    clearfontcolors,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}
+
+\bigskip
+
+% ---- Figurine specimen (LSF encoding) ----
+
+{\large\figfont\symking\symqueen\symrook\symbishop\symknight\sympawn}\\[4pt]
+
+\end{document}

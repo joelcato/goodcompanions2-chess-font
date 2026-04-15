@@ -1,0 +1,151 @@
+% sample-skaknew.tex -- SKAKnew Chess Font
+%   Gallery page in the style of chessfonts_gallery.pdf (Ulrike Fischer)
+% Compile with: pdflatex sample-skaknew.tex
+% (Font must be installed via TeX Live -- see README.md for installation instructions.)
+\documentclass{article}
+
+\usepackage[
+  a4paper,
+  top=2.5cm, bottom=2.5cm, left=3cm, right=3cm
+]{geometry}
+
+\usepackage[LSB1,LSBC1,LSBC2,LSBC3,LSBC4,LSF,T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{chessboard}
+\usepackage{chessfss}
+
+% ---- Font setup ----
+\setfigfontfamily{skaknew}
+
+\setchessboard{
+  boardfontfamily=skaknew,
+  boardfontencoding=LSB1,
+  boardfontsize=20pt,
+  borderwidth=0.5pt,
+  bordercolor=black,
+  showmover=false,
+  labelleft=true,
+  labelbottom=true,
+  labelfont=\rmfamily\bfseries,
+  labelfontsize=7pt
+}
+
+\newcommand{\startfen}{rnbqkbnr/pppppppp/8/3qk3/3QK3/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1}
+
+\begin{document}
+\parindent=0pt
+
+\bigskip
+
+\noindent\textbf{SKAKnew}
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+source:     & \texttt{https://www.enpassant.dk/chess/fonteng.htm} \\[2pt]
+author:     & Eric Bentzen (2003) \\[2pt]
+characters: & figurine and board symbols \\[2pt]
+familyname: & skaknew \\[2pt]
+fonts:      & The following fonts for the package chessfss can be made from this source: \\
+\end{tabular}
+
+\medskip
+\begin{tabular}{@{}lll>{\raggedright\arraybackslash\small}p{6.5cm}@{}}
+\toprule
+encoding & serie & tfm-name & notes \\
+\midrule
+LSB1    & \texttt{m}  & \texttt{SkakNew-DiagramT} / \texttt{SkakNew-Diagram} & standard board ($<$16pt / $\geq$16pt) \\[4pt]
+LSBC1   & \texttt{m}  & \texttt{SkakNew-DiagramT} / \texttt{SkakNew-Diagram} & color board, direct field coloring \\[4pt]
+LSBC2   & \texttt{m}  & \texttt{SkakNew-DiagramT} / \texttt{SkakNew-Diagram} & color board, mask-based \\[4pt]
+LSBC3   & \texttt{m}  & \texttt{SkakNew-DiagramT} / \texttt{SkakNew-Diagram} & color board, mask-based (variant) \\[4pt]
+LSBC4   & \texttt{m}  & \texttt{SkakNew-DiagramT} / \texttt{SkakNew-Diagram} & color board, mask-based (variant) \\[4pt]
+LSF     & \texttt{m}  & \texttt{SkakNew-Figurine} & figurine notation \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+
+% ---- LSB1 ----
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,setfontcolors]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]
+\end{minipage}
+
+\bigskip
+
+% ---- LSBC1 ----
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC1}%
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,setfontcolors]}%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC1}%
+  \chessboard[setfen=\startfen,
+    clearfontcolors,blackfieldcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}
+
+\bigskip
+
+% ---- LSBC2 ----
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC2}%
+  \chessboard[setfen=\startfen,
+    whitefieldmaskcolor=white,blackfieldmaskcolor=black!60,setfontcolors]}%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC2}%
+  \chessboard[setfen=\startfen,
+    whitefieldmaskcolor=white,blackfieldmaskcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}
+
+\bigskip
+
+% ---- LSBC3 ----
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC3}%
+  \chessboard[setfen=\startfen,
+    whitefieldmaskcolor=white,blackfieldmaskcolor=black!60,setfontcolors]}%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC3}%
+  \chessboard[setfen=\startfen,
+    whitefieldmaskcolor=white,blackfieldmaskcolor=black!60,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}
+
+\bigskip
+
+% ---- LSBC4 ----
+
+\noindent
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC4}%
+  \chessboard[setfen=\startfen,
+    blackfieldmaskcolor=black!25,setfontcolors]}%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}
+  {\setchessboard{boardfontencoding=LSBC4}%
+  \chessboard[setfen=\startfen,
+    blackfieldmaskcolor=black!25,colorwhite=blue,colorblack=red,setfontcolors]}%
+\end{minipage}
+
+\bigskip
+
+% ---- Figurine specimen (LSF encoding) ----
+
+{\large\figfont\symking\symqueen\symrook\symbishop\symknight\sympawn}\\[4pt]
+
+\end{document}
