@@ -28,7 +28,7 @@ SOFTWARE.
 
 ## Original GoodCompanions font (goodcompanions.ttf, PFB, AFM)
 
-The original **GoodCompanions** chess font was created by Armando H. Marroquin (2004)
+The original **GoodCompanions** chess font was created by David L. Brown (2004)
 and is distributed as freeware, freely redistributable for non-commercial use.
 
 Source: http://www.enpassant.dk/chess/fonteng.htm

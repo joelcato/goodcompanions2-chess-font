@@ -7,10 +7,19 @@
   top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm
 ]{geometry}
 
-\usepackage[LSB1,T1]{fontenc}
+\usepackage[LSB1,LSF,T1]{fontenc}
 \usepackage{chessboard}
 \usepackage{chessfss}
 \usepackage[dvipsnames]{xcolor}
+
+\setfigfontfamily{goodcompanions2}
+
+% Figurine shorthand for game notation
+\newcommand{\fK}{{\figfont\symking}}
+\newcommand{\fQ}{{\figfont\symqueen}}
+\newcommand{\fR}{{\figfont\symrook}}
+\newcommand{\fB}{{\figfont\symbishop}}
+\newcommand{\fN}{{\figfont\symknight}}
 
 \setchessboard{
   boardfontencoding=LSB1,
@@ -51,5 +60,31 @@
 \noindent
 \fontboard{SKAKnew}{skaknew}\hfill
 \fontboard{AlphaDia}{alphadia}
+
+\bigskip\hrule\bigskip
+
+% Opera Game -- figurine notation test
+% Morphy vs.\ Duke of Brunswick \& Count Isouard, Paris 1858
+\noindent\textbf{\fN{} Morphy vs.\ Duke of Brunswick \& Count Isouard, Paris Opera, 1858}
+
+\medskip
+\noindent
+1.e4 e5
+2.\fN{}f3 d6
+3.d4 \fB{}g4
+4.dxe5 \fB{}xf3
+5.\fQ{}xf3 dxe5
+6.\fB{}c4 \fN{}f6
+7.\fQ{}b3 \fQ{}e7
+8.\fN{}c3 c6
+9.\fB{}g5 b5
+10.\fN{}xb5 cxb5
+11.\fB{}xb5+ \fN{}bd7
+12.0-0-0 \fR{}d8
+13.\fR{}xd7 \fR{}xd7
+14.\fR{}d1 \fQ{}e6
+15.\fB{}xd7+ \fN{}xd7
+16.\fQ{}b8+ \fN{}xb8
+17.\fR{}d8\# 1--0
 
 \end{document}

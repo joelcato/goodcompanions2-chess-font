@@ -1,6 +1,6 @@
 # GoodCompanions2 — Chess font for LaTeX's `chessboard` package
 
-Joel Cato's [`chessboard`](https://ctan.org/pkg/chessboard) / [`chessfss`](https://ctan.org/pkg/chessfss) adaptation of the [GoodCompanions](http://www.enpassant.dk/chess/fonteng.htm) chess font by Armando H. Marroquin (2004).
+Joel Cato's [`chessboard`](https://ctan.org/pkg/chessboard) / [`chessfss`](https://ctan.org/pkg/chessfss) adaptation of the [GoodCompanions](http://www.enpassant.dk/chess/fonteng.htm) chess font by David L. Brown (2004).
 
 See **[sample.pdf](sample.pdf)** for a preview showing all encodings and color options.
 
@@ -420,7 +420,7 @@ See `sample.tex` for a complete working example.
 
 ## License
 
-The original **GoodCompanions** font is freeware by Armando H. Marroquin (2004), freely redistributable for non-commercial use.
+The original **GoodCompanions** font is freeware by David L. Brown (2004), freely redistributable for non-commercial use.
 
 This adaptation is released under the [MIT License](LICENSE.md) by Joel Cato (2026).
 
